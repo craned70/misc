@@ -1,18 +1,18 @@
 const fetch = require('node-fetch');
-
 const searchGitJobs = function(description, location) {
     const url = `https://jobs.github.com/positions.json?description=${description}&location=${location}`.replace(/ /g,"+");
-    fetch(url)
+    return fetch(url)
         .then((res) => res.json())
-        .then((json) => {
-            for (i of json) {
-                console.log(i);
-            }
-        });   
+        .then((jobs) => {
+            return jobs.map((eachJob) => {
+                return {
+                    title: eachJob.title,
+                    location: eachJob.location,
+                    company: eachJob.company
+                };
+            })
+        })   
 };
 
-searchGitJobs("javascript back end", "california");
-
-
-
-  
+const formattedJobs = searchGitJobs("javascript", "california");
+formattedJobs.then(console.log);
