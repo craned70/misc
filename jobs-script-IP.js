@@ -19,4 +19,4 @@ const searchGitJobsIP = function(description) {
                 });
         });
 };
-searchGitJobs("javascript").then(console.log);
+searchGitJobsIP("javascript").then(console.log);
